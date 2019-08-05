@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		343A356222F2C1A000354F9B /* plantCDATA_catalog.xml in Resources */ = {isa = PBXBuildFile; fileRef = 343A356022F2C18500354F9B /* plantCDATA_catalog.xml */; };
+		343A356322F2C1A100354F9B /* plantCDATA_catalog.xml in Resources */ = {isa = PBXBuildFile; fileRef = 343A356022F2C18500354F9B /* plantCDATA_catalog.xml */; };
+		343A356422F2C1A200354F9B /* plantCDATA_catalog.xml in Resources */ = {isa = PBXBuildFile; fileRef = 343A356022F2C18500354F9B /* plantCDATA_catalog.xml */; };
 		8B080D1521504662009B8DBB /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B080D1021504662009B8DBB /* Document.swift */; };
 		8B080D1621504662009B8DBB /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B080D1021504662009B8DBB /* Document.swift */; };
 		8B080D1721504662009B8DBB /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B080D1021504662009B8DBB /* Document.swift */; };
@@ -73,6 +76,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		343A356022F2C18500354F9B /* plantCDATA_catalog.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = plantCDATA_catalog.xml; sourceTree = "<group>"; };
 		8B080D1021504662009B8DBB /* Document.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 		8B080D1121504662009B8DBB /* Element.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Element.swift; sourceTree = "<group>"; };
 		8B080D1221504662009B8DBB /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
@@ -191,6 +195,7 @@
 		8B080D3521504733009B8DBB /* Sample XML Files */ = {
 			isa = PBXGroup;
 			children = (
+				343A356022F2C18500354F9B /* plantCDATA_catalog.xml */,
 				8B080D3621504733009B8DBB /* example.xml */,
 				8B080D3721504733009B8DBB /* plant_catalog.xml */,
 				8B080D3821504733009B8DBB /* whitespace_examples.xml */,
@@ -506,6 +511,7 @@
 				8B080D3D21504826009B8DBB /* example.xml in Resources */,
 				8B080D4321504831009B8DBB /* whitespace_examples.xml in Resources */,
 				8B080D402150482A009B8DBB /* plant_catalog.xml in Resources */,
+				343A356222F2C1A000354F9B /* plantCDATA_catalog.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,6 +522,7 @@
 				8B080D3F21504828009B8DBB /* example.xml in Resources */,
 				8B080D4521504832009B8DBB /* whitespace_examples.xml in Resources */,
 				8B080D422150482E009B8DBB /* plant_catalog.xml in Resources */,
+				343A356422F2C1A200354F9B /* plantCDATA_catalog.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -533,6 +540,7 @@
 				8B080D3E21504827009B8DBB /* example.xml in Resources */,
 				8B080D4421504832009B8DBB /* whitespace_examples.xml in Resources */,
 				8B080D412150482B009B8DBB /* plant_catalog.xml in Resources */,
+				343A356322F2C1A100354F9B /* plantCDATA_catalog.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,6 +14,7 @@ class AEXMLTests: XCTestCase {
     
     var exampleDocument = AEXMLDocument()
     var plantsDocument = AEXMLDocument()
+    var plantsCDATADocument = AEXMLDocument()
     
     // MARK: - Helpers
     
@@ -48,12 +49,14 @@ class AEXMLTests: XCTestCase {
         // create some sample xml documents
         exampleDocument = readXMLFromFile(filename: "example")
         plantsDocument = readXMLFromFile(filename: "plant_catalog")
+        plantsCDATADocument = readXMLFromFile(filename: "plantCDATA_catalog")
     }
     
     override func tearDown() {
         // reset sample xml document
         exampleDocument = AEXMLDocument()
         plantsDocument = AEXMLDocument()
+        plantsCDATADocument = AEXMLDocument()
         
         super.tearDown()
     }
@@ -140,6 +143,21 @@ class AEXMLTests: XCTestCase {
         }
         return nil
     }
+            
+    func testXMLWithCDATAParser() {
+        do {
+            let testDocument = AEXMLDocument()
+            let url = URLForResource(fileName: "plantCDATA_catalog", withExtension: "xml")
+            let data = try Data.init(contentsOf: url)
+            
+            let parser = AEXMLParser(document: testDocument, data: data)
+            try parser.parse()
+            
+            XCTAssertEqual(testDocument.root.name, "CATALOG", "Should be able to find root element.")
+        } catch {
+            XCTFail("Should be able to parse XML Data into XML Document without throwing error.")
+        }
+    }
     
     func testXMLParserError() {
         do {
@@ -213,8 +231,23 @@ class AEXMLTests: XCTestCase {
     func testStringValue() {
         let firstPlant = plantsDocument.root["PLANT"]
         
-        let firstPlantCommon = firstPlant["COMMON"].string
-        XCTAssertEqual(firstPlantCommon, "Bloodroot", "Should be able to return element value as string.")
+        let firstPlantCommon = firstPlant["COMMON"]
+        XCTAssertEqual(firstPlantCommon.isCDATA, false, "Should be able to return element value as string.")
+        XCTAssertEqual(firstPlantCommon.value, "Bloodroot", "Should be able to return element value as string.")
+        
+        let firstPlantElementWithoutValue = firstPlant["ELEMENTWITHOUTVALUE"].string
+        XCTAssertEqual(firstPlantElementWithoutValue, "", "Should be able to return empty string if element has no value.")
+        
+        let firstPlantEmptyElement = firstPlant["EMPTYELEMENT"].string
+        XCTAssertEqual(firstPlantEmptyElement, String(), "Should be able to return empty string if element has no value.")
+    }
+    
+    func testCDATAStringValue() {
+        let firstPlant = plantsCDATADocument.root["PLANT"]
+        
+        let firstPlantCommon = firstPlant["COMMON"]
+        XCTAssertEqual(firstPlantCommon.isCDATA, true, "Should be able to return element value as string.")
+        XCTAssertEqual(firstPlantCommon.string, "Bloodroot", "Should be able to return element value as string.")
         
         let firstPlantElementWithoutValue = firstPlant["ELEMENTWITHOUTVALUE"].string
         XCTAssertEqual(firstPlantElementWithoutValue, "", "Should be able to return empty string if element has no value.")
@@ -369,11 +402,14 @@ class AEXMLTests: XCTestCase {
         let ducks = exampleDocument.root.addChild(name: "ducks")
         ducks.addChild(name: "duck", value: "Donald")
         ducks.addChild(name: "duck", value: "Daisy")
-        ducks.addChild(name: "duck", value: "Scrooge")
+        ducks.addChild(name: "duck", value: "Scrooge", isCDATA: true)
         
         let animalsCount = exampleDocument.root.children.count
         XCTAssertEqual(animalsCount, 3, "Should be able to add child elements to an element.")
+        XCTAssertEqual(exampleDocument.root["ducks"]["duck"].first!.string, "Donald", "Should be able to iterate ducks now.")
+        XCTAssertEqual(exampleDocument.root["ducks"]["duck"].first!.isCDATA, false, "Should be able to iterate ducks now.")
         XCTAssertEqual(exampleDocument.root["ducks"]["duck"].last!.string, "Scrooge", "Should be able to iterate ducks now.")
+        XCTAssertEqual(exampleDocument.root["ducks"]["duck"].last!.isCDATA, true, "Should be able to iterate ducks now.")
     }
     
     func testAddChildWithAttributes() {
