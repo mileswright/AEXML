@@ -24,6 +24,9 @@ public struct AEXMLOptions {
         public var xmlString: String {
             return "<?xml version=\"\(version)\" encoding=\"\(encoding)\" standalone=\"\(standalone)\"?>"
         }
+        
+        /// DOCTYPE declaration
+        public var doctypeDeclaration: String?
     }
     
     /// Settings used by `Foundation.XMLParser`
